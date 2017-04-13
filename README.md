@@ -7,6 +7,10 @@ Desenvolver uma aplicação multicamada utilizando o ambiente WEB para automatiz
 
 Apêndice E - Atendimento Intraescolar
 
+http://bit.ly/2pxH10P
+
+Pg. 30
+
 Início: 05/04/2017
 
 Fim: 10/05/2017
