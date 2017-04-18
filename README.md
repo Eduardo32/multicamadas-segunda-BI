@@ -7,7 +7,7 @@ Desenvolver uma aplicação multicamada utilizando o ambiente WEB para automatiz
 
 Apêndice E - Atendimento Intraescolar
 
-http://bit.ly/2pxH10P
+http://bit.ly/2nZrHhp
 
 Pg. 30
 
