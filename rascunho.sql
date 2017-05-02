@@ -2,27 +2,26 @@ create database Atividade2BI;
 
 use Atividade2BI;
 
-create table login(
-	cod_Login int(4) primary key auto_increment not null,
-    login varchar(50) not null,
-    senha varchar(50) not null
-);
-
 create table professores(
-	login_cod_Login int(4) not null,
+	matricula int(10) primary key not null,
     nome varchar(50) not null,
     
-    index(nome),
-    
-    foreign key (login_cod_Login) references
-    login (cod_Login)
+    index(nome)
 );
 
-insert into login(login, senha)
-value('Eduardo32', '1234');
+create table login(
+    professores_matricula int(10) not null,
+    senha varchar(50) not null,
+    
+    foreign key (professores_matricula) references
+    professores (matricula)
+);
 
-insert into professores(login_cod_Login, nome)
-value(1, 'Paulo Eduardo Costa');
+insert into professores(matricula, nome)
+value(2014790020, 'Paulo Eduardo Costa');
+
+insert into login(professor_matricula, senha)
+value(2014790020, '1234');
 
 -- --------------------------------------------------------------------------
 -- TABELA DE CAMPUS
