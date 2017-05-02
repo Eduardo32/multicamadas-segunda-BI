@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
+   
     <head>
         <link rel="ico" href="../imagens/ifpa.gif" type="image/gif" />
         <link rel="shotcut icon" href="../imagens/ifpa.gif" type="image/gif" />
@@ -14,16 +15,9 @@
         
         <script src="../js/jquery-3.2.0.min.js" type="text/javascript"></script>
         
-        <title>IFPA | Login</title>
+        <title>IFPA | Registro</title>
     </head>
     <body class="corpo">
-        <%
-            String erro = String.valueOf(request.getAttribute("erro"));
-            if(erro.equals("null")) {
-                erro = "";
-            }
-            
-        %>
         <div class="container center-block">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
@@ -34,32 +28,41 @@
             </div>
             
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                    <div id="erro"> <%= erro %> </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="erro"> <%--= erro --%> </div>
                     
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Entrar</h3>
+                            <h3 class="panel-title">Registro de Professor</h3>
                         </div>
                         <div class="panel-body">
-                            <form method="POST" action="../controle/controlelogin.jsp" data-toggle="validator" role="form">
+                            <form method="POST" action="../controle/controleregistro.jsp" data-toggle="validator" role="form">
+                                
+                                <div class="form-group">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="matricula">Matrícula</label>
                                     <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matrícula" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="senha">Senha</label>
                                     <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
+                                
                                 <div class="btn-group pull-right">
                                     <button id="enviar" type="submit" class="btn btn-success">Enviar</button>
 				</div>
                             </form>
                         </div>
                         <div class="panel-footer">
-                            <a href="registro.jsp">Registrar</a>
+                            <a href="login.jsp">Voltar</a>
                         </div>
                     </div>
                 </div>

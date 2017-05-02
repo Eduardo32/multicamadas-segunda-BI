@@ -19,16 +19,15 @@
             ResultSet rs;
             String erro = "<div class='alert alert-danger alert-dismissible' role='alert'>"
                             + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
-                            + "<strong>Erro!</strong> Senha ou login inválido."
+                            + "<strong>Erro!</strong> Matrícula ou Senha inválida."
                         + "</div>";
             
-            professor.setLogin(request.getParameter("login"));
+            professor.setMatricula(request.getParameter("matricula"));
             professor.setSenha(request.getParameter("senha"));
             
-            rs = ProfessorDAO.pesquisarPorLogin(professor);
+            rs = ProfessorDAO.pesquisarLogin(professor);
             
-            if(rs.next() && rs.getString(3).equals(professor.getSenha())) {
-                professor.setCodigo(rs.getString(1));
+            if(rs.next() && rs.getString(2).equals(professor.getSenha())) {
                 session.setAttribute("professor", professor);
                 RequestDispatcher rd = request.getRequestDispatcher("../paginas/entrada.jsp");
                 rd.forward(request, response);

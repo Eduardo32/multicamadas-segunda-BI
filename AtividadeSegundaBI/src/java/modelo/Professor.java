@@ -10,18 +10,17 @@ package modelo;
  * @author ALUNO
  */
 public class Professor {
-    private String codigo;
+    
+    private String matricula;
     private String nome;
-    //private String cpf;
-    private String login;
     private String senha;
 
-    public String getCodigo() {
-        return codigo;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getNome() {
@@ -30,14 +29,6 @@ public class Professor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getSenha() {
