@@ -11,10 +11,28 @@ package modelo;
  */
 public class Professor {
     
+    private String campus;
+    private String coordenador;
     private String matricula;
     private String nome;
     private String senha;
 
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
+    }
+
+    public String getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(String coordenador) {
+        this.coordenador = coordenador;
+    }
+    
     public String getMatricula() {
         return matricula;
     }

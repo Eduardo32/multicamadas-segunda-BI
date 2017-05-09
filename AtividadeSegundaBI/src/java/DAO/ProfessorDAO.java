@@ -30,9 +30,9 @@ public class ProfessorDAO {
     }
     
     public static ResultSet pesquisarProfessor(Professor professor) {
-        SQL = "select * ";
-        SQL += "from professores ";
-        SQL += "where matricula = '" + professor.getMatricula()+ "'";
+        SQL = "select * "
+                + "from professores "
+                + "where professores.matricula = '" + professor.getMatricula() + "'";
         
         System.out.println(SQL);
         rs = Conexao.retornarDados(SQL);
@@ -41,8 +41,10 @@ public class ProfessorDAO {
     }
     
     public static void inserirProfessor(Professor professor) {
-        SQL = "insert into professores (matricula, nome) ";
-        SQL += "value('" + professor.getMatricula() + "','" + professor.getNome() + "')";
+        SQL = "insert into professores (campus, coordenador, matricula, nome) ";
+        SQL += "value('" + professor.getCampus() + "','" + professor.getCoordenador() + "'"
+                + ",'" + professor.getMatricula() + "','" + professor.getNome() + "')";
+        
         System.out.println(SQL);
         Conexao.manipularDados(SQL);
         
