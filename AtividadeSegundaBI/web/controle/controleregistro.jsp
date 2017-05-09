@@ -17,7 +17,13 @@
         <jsp:useBean class="modelo.Professor" id="professor" />
         <%
             ResultSet rs;
+            String erro = "<div class='alert alert-danger alert-dismissible' role='alert'>"
+                            + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
+                            + "<strong>Erro!</strong> Essa matrícula já cadastrada."
+                        + "</div>";
             
+            professor.setCampus(request.getParameter("campus"));
+            professor.setCoordenador(request.getParameter("coordenador"));
             professor.setMatricula(request.getParameter("matricula"));
             professor.setNome(request.getParameter("nome"));
             professor.setSenha(request.getParameter("senha"));
@@ -25,7 +31,9 @@
             rs = ProfessorDAO.pesquisarProfessor(professor);
             
             if(rs.next()) {
-                %><p>Matricula ja cadastrada</p><%
+                request.setAttribute("erro", erro);
+                RequestDispatcher rd = request.getRequestDispatcher("../paginas/registro.jsp");
+                rd.forward(request, response);
             } else {
                 ProfessorDAO.inserirProfessor(professor);
                 session.setAttribute("professor", professor);

@@ -28,6 +28,14 @@
             rs = ProfessorDAO.pesquisarLogin(professor);
             
             if(rs.next() && rs.getString(2).equals(professor.getSenha())) {
+                rs = ProfessorDAO.pesquisarProfessor(professor);
+                if(rs.next()) {
+                    professor.setMatricula(rs.getString(1));
+                    professor.setNome(rs.getString(2));
+                    professor.setCoordenador(rs.getString(3));
+                    professor.setCampus(rs.getString(4));
+                }
+                                                
                 session.setAttribute("professor", professor);
                 RequestDispatcher rd = request.getRequestDispatcher("../paginas/entrada.jsp");
                 rd.forward(request, response);

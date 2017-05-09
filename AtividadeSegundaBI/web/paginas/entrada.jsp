@@ -21,21 +21,39 @@
         <link href="../css/bootstrap.css" rel="stylesheet">
         
         <script src="../js/jquery-3.2.0.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function () {
+                $('#anoLetivo').change(function () {
+                    var ano = $('#anoLetivo').val();
+                    
+                    $.post("../controle/carregarsemestre.jsp", {ano: ano}, function (data) {
+                        $('#semestre').html(data);
+                    });
+                });
+                
+                $('#semestre').change(function () {
+                    var ano = $('#anoLetivo').val();
+                    var semestre = $('#semestre').val();
+                    
+                    $.post("../controle/carregaratividades.jsp", {ano: ano, semestre: semestre, matricula: matricula}, function (data) {
+                        $('#atividades').html(data);
+                    });
+                });                
+            });
+        </script>
         
         <title>IFPA | Bem-Vindo</title>
     </head>
     <body class="corpo">
         <jsp:useBean class="modelo.Professor" id="professor" />
         <%
-            ResultSet rs;
             professor = (Professor) session.getAttribute("professor");
-            
-            if(professor.getNome() == null) {
-                rs = ProfessorDAO.pesquisarProfessor(professor);
-                if(rs.next()){
-                    professor.setNome(rs.getString(2));
-                }
+            if(professor == null){
+                RequestDispatcher rd = request.getRequestDispatcher("../paginas/login.jsp");
+                rd.forward(request, response);
             }
+            
+            %><script>var matricula = <%= professor.getMatricula() %>;</script><%
         %>
         <div class="container center-block">
             <div class="row">
@@ -53,36 +71,61 @@
                             <h3 class="panel-title">Bem-Vindo Prof. <%= professor.getNome() %></h3>
                         </div>
                         <div class="panel-body">
-                                <p>Olá, professor aqui você pode visualizar todos os seus atendimentos intraescolar cadastrados.</p>
-                                <p>Para cadastrar um novo click no botão cadastrar novo.</p>
+                            <a class="btn btn-success pull-right" href="../controle/controlesair.jsp" role="button">Sair</a>
+                            <p><b>Coordenador: <%= professor.getCoordenador() %></b></p>
+                            <p><b>Campus: <%= professor.getCampus() %></b></p>
+                            
+                            <p>Olá, professor selecionando o ano letivo e o semestre 
+                                você podera visualizar os seus atendimentos intraescolares 
+                                cadastrados.</p>
+                            
+                            
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="anoLetivo">Ano Letivo</label>
+                                    <select class="form-control" name="anoLetivo" id="anoLetivo">
+                                        <option value="0">-- Selecione --</option>
+                                        <option value="2016">2016</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="semestre">Semestre</label>
+                                    <select class="form-control" name="semestre" id="semestre">
+                                        <option value="0">-- Selecione o Ano --</option>
+                                    </select>
+                                </div>
+                            </form>
+                            
+                            
+                            <br>
                                 
                             <div class="panel panel-default">
-                                <div class="panel-heading">Atendimentos Intraescolar Cadastrados</div>
+                                <div class="panel-heading">Atendimentos Intraescolares Cadastrados</div>
   
+                                <div class="table-responsive">
+                                    
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Ano Letivo</th>
                                             <th>Nº de Aulas</th>
                                             <th>Dia</th>
                                             <th>Mes</th>
+                                            <th>Horario</th>
                                             <th>Local (Bloco/Sala)</th>
+                                            <th>Atividade</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        
+                                    <tbody name="atividades" id="atividades">
+                                                                                
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
-                            
-                            <a class="btn btn-success pull-right" href="#" role="button">Cadastrar Novo</a>
+                            <p>Para cadastrar um novo, click no botão cadastrar novo.</p>
+                            <div class="pull-right">
+                                <input class="btn btn-success " type="button" aria-label="..." onClick="window.print()" value="Imprimir">
+                                <a class="btn btn-success " href="/AtividadeSegundaBI/paginas/cadastro.jsp" role="button" aria-label="...">Cadastrar Novo</a>
+                            </div>
                         </div>
 
                         <div class="panel-footer">

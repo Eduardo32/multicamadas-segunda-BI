@@ -59,7 +59,7 @@
                             </form>
                         </div>
                         <div class="panel-footer">
-                            <a href="registro.jsp">Registrar</a>
+                            <a href="/AtividadeSegundaBI/paginas/registro.jsp">Registrar</a>
                         </div>
                     </div>
                 </div>
