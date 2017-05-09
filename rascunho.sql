@@ -2,65 +2,47 @@ create database Atividade2BI;
 
 use Atividade2BI;
 
+-- --------------------------------------------------------------------------
+-- TABELA DE PROFESSORES
+-- --------------------------------------------------------------------------
+
 create table professores(
-	matricula int(10) primary key not null,
+    matricula varchar(15) primary key not null,
     nome varchar(50) not null,
-    
+    coordenador varchar(50) not null,
+    campus varchar(25) not null,
+        
     index(nome)
 );
 
+-- --------------------------------------------------------------------------
+-- TABELA DE LOGIN
+-- --------------------------------------------------------------------------
+
 create table login(
-    professores_matricula int(10) not null,
+    professores_matricula varchar(15) not null,
     senha varchar(50) not null,
     
     foreign key (professores_matricula) references
     professores (matricula)
 );
 
-insert into professores(matricula, nome)
-value(2014790020, 'Paulo Eduardo Costa');
-
-insert into login(professor_matricula, senha)
-value(2014790020, '1234');
-
 -- --------------------------------------------------------------------------
--- TABELA DE CAMPUS
+-- TABELA DE FICHAS
 -- --------------------------------------------------------------------------
 
-create table campus(
-	cod_Campus int(2) primary key auto_increment not null,
-    nome varchar(25) not null,
+create table fichas(
+    cod_Ficha int(3) auto_increment primary key not null,
+    numeroDeAulas int(1) not null,
+    professores_matricula varchar(15) not null,
+    ano int(4) not null,
+    semestre int(1) not null,
+    dataAtendimento date not null,
+    horaAtendimento time not null,
+    bloco varchar(15) not null,
+    sala varchar(15) not null,
+    atividade varchar(50) not null,
     
-    index(nome)
-);
-
-insert into campus(nome)
-values('Abaetetuba'),
-('Altamira'),
-('Ananindeua'),
-('Belém'),
-('Bragança'),
-('Breves'),
-('Cametá'),
-('Castanhal'),
-('Conceição do Araguaia'),
-('Marabá - Industrial'),
-('Marabá - Rural'),
-('Itaituba'),
-('Óbidos'),
-('Parauapebas'),
-('Paragominas'),
-('Santarém'),
-('Tucuruí'),
-('Vigia');
-
--- --------------------------------------------------------------------------
--- TABELA DE BLOCOS
--- --------------------------------------------------------------------------
-
-create table blocos(
-	cod_Bloco int(2) primary key auto_increment not null,
-    nome varchar(10) not null
-    
-    index (nome);
+    foreign key (professores_matricula) references
+    professores (matricula)
 );
