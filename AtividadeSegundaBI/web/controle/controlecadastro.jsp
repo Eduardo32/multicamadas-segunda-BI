@@ -15,7 +15,7 @@
         <%
             String confirmacao = "<div class='alert alert-success alert-dismissible' role='alert'>"
                     + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
-                    + "<strong>Erro!</strong> Atividade cadastrada com sucesso."
+                    + "<strong>Sucesso!</strong> Atividade cadastrada com sucesso."
                     + "</div>";
             
             professor = (Professor) session.getAttribute("professor");
